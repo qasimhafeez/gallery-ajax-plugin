@@ -19,6 +19,10 @@ class GalleryPlugin{
         add_action('init', array($this, 'custom_post_type'));
     }
 
+    function register(){
+        add_action('wp_enqueue_scripts', array($this, 'enqueue'));
+    }
+
     function activate(){
         $this->custom_post_type();
         flush_rewrite_rules();
@@ -32,10 +36,15 @@ class GalleryPlugin{
     function custom_post_type(){
         register_post_type('gallery', ['public' => true, 'label' => "Gallery"]);
     }
+
+    function enqueue(){
+        wp_enqueue_script('script', plugins_url('/assets/js/script.js', __FILE__));
+    }
 }
 
 if(class_exists('GalleryPlugin')){
     $galleryPlugin = new GalleryPlugin();
+    $galleryPlugin->register();
 }
 
 //activation
