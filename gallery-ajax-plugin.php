@@ -33,9 +33,13 @@ class GalleryPlugin{
         flush_rewrite_rules();
     }
 
+    // Custom Post
     function custom_post_type(){
         register_post_type('gallery', 
             ['public' => true, 'label' => "Gallery", 'taxonomies' => array( 'category' ), 'supports' => ['title', 'editor', 'thumbnail']]);
+        add_action( 'after_setup_theme', function () {
+            add_theme_support( 'post-thumbnails' , ['gallery'] );
+        });
     }
 
     function enqueue(){
