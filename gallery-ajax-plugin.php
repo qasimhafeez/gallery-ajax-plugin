@@ -34,7 +34,8 @@ class GalleryPlugin{
     }
 
     function custom_post_type(){
-        register_post_type('gallery', ['public' => true, 'label' => "Gallery"]);
+        register_post_type('gallery', 
+            ['public' => true, 'label' => "Gallery", 'taxonomies' => array( 'category' ), 'supports' => ['title', 'editor', 'thumbnail']]);
     }
 
     function enqueue(){
